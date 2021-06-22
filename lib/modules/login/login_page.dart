@@ -43,6 +43,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Positioned(
                     bottom: 0,
+                    left: 0,
+                    right: 0,
                     child: Container(
                       width: 300,
                       height: 50,
