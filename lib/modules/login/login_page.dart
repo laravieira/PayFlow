@@ -92,7 +92,9 @@ class _LoginPageState extends State<LoginPage> {
                   SocialLoginButton(
                     width: size.width * 0.8,
                     height: size.height * 0.07,
-                    onTap: controller.googleSignIn,
+                    onTap: () {
+                      controller.googleSignIn(context);
+                    },
                   ),
                 ],
               ),
