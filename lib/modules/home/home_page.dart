@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:payflow/models/user_model.dart';
+import 'package:payflow/modules/home/home_controller.dart';
 import 'package:payflow/shared/auth/auth_controller.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final HomeController controller = HomeController();
+  final pages = [Container(color: Colors.red), Container(color: Colors.blue)];
   @override
   Widget build(BuildContext context) {
     UserModel user = AuthController.user;
@@ -47,13 +55,18 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+      body: pages[controller.currentPage],
       bottomNavigationBar: Container(
         height: 90,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  controller.setPage(0);
+                });
+              },
               icon: const Icon(Icons.home),
               color: AppColors.primary,
             ),
@@ -67,7 +80,11 @@ class HomePage extends StatelessWidget {
                   onPressed: () {}, icon: const Icon(Icons.add_box_outlined)),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  controller.setPage(1);
+                });
+              },
               icon: const Icon(Icons.description_outlined),
               color: AppColors.body,
             ),
