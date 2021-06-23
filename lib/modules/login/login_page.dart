@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:payflow/modules/login/login_controller.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_images.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
@@ -18,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    LoginController controller = LoginController();
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Container(
@@ -90,19 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                   SocialLoginButton(
                     width: size.width * 0.8,
                     height: size.height * 0.07,
-                    onTap: () async {
-                      GoogleSignIn _googleSignIn = GoogleSignIn(
-                        scopes: [
-                          'email',
-                        ],
-                      );
-                      try {
-                        final response = await _googleSignIn.signIn();
-                        print(response);
-                      } catch (error) {
-                        print(error);
-                      }
-                    },
+                    onTap: controller.googleSignIn,
                   ),
                 ],
               ),
